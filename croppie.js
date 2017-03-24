@@ -2,7 +2,7 @@
  * Croppie
  * Copyright 2016
  * Foliotek
- * Version: 2.4.1
+ * Version: 2.4.2
  *************************/
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
@@ -163,7 +163,7 @@
             if (img.src === src) {
                 // If image source hasn't changed resolve immediately
                 resolve(img);
-            } 
+            }
             else {
                 img.removeAttribute('crossOrigin');
                 if (src.match(/^https?:\/\/|^\/\//)) {
@@ -789,7 +789,7 @@
 
         self.options.update.call(self, data);
         if (self.$ && typeof Prototype == 'undefined') {
-            self.$(self.element).trigger('update', data); 
+            self.$(self.element).trigger('update', data);
         }
         else {
             var ev;
@@ -1219,6 +1219,11 @@
                 case 'blob':
                     _getBlobResult.call(self, data).then(resolve);
                     break;
+                case 'size':
+                    resolve({
+                      height: data.outputHeight,
+                      width: data.outputWidth
+                    });
                 default:
                     resolve(_getHtmlResult.call(self, data));
                     break;
